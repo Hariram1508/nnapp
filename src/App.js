@@ -1,21 +1,44 @@
+import { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 
 
 
 function App() {
+  const [name,setName]=useState('');
+  const [location,setLocation]=useState('');
+  const [fatherName,setfatherName]=useState('');
+  const [Detail,setDetail]=useState([]);
+  
+
+   const onsubmit =(e) =>{
+    e.preventDefault();
+    const newDetail ={
+      name,location,fatherName 
+   } 
+    setDetail([...Detail, newDetail]) 
+    setName("");
+    setLocation("");
+    setfatherName("");
+  }
   return (
-    <Container fluid>
- <Row >
-       <Col lg={5} md={1} sm={2} className='bg-primary p-5 col-lg-5'>Column1</Col>
-       <Col lg={5} md={2} sm={2} className='bg-success p-5 '>Column2</Col>
-       <Col lg={1} md={4} sm={2} className='bg-secondary p-5 '>Column3</Col>
-       <Col lg={1} md={5} sm={2} className='bg-danger p-5 '>Column4</Col>
-    </Row>
-  </Container>
+    <div className=''>
+   <form className=''>
+    <input type="text"   onChange={(e) => setName(e.target.value)}placeholder='Enter your name '></input>
+    <input type="text"   onChange={(e) => setLocation(e.target.value)}placeholder='Enter your name '></input>
+    <input type="text"   onChange={(e) => setfatherName(e.target.value)}placeholder='Enter your name '></input>
+    <input type="submit" onClick={onsubmit}  value={'submit'} />
+   </form>
+     {Detail.map((info, index) =>(
+      <div key={index}>
+        <h1>Detail</h1> 
+         <p>Name: {info.name}</p>
+         <p>Location: {info.location}</p>
+         <p>father Name: {info.name}</p>
+      </div> 
+     ))}    
+   </div>
+
   );
 }
 
